@@ -1,0 +1,23 @@
+from .db import db, environment, SCHEMA, add_prefix_for_prod
+
+class MenuItem(db.Model):
+    __tablename__ = 'menu_items'
+    if environment == "production":
+        __table_args__ = {'schema': SCHEMA}
+
+    id = db.Column(db.Integer, primary_key=True)
+    restaurant_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("restaurants.id")), nullable=False)
+    name = db.Column(db.String(100), nullable=False)
+    description = db.Column(db.Text)
+    price = db.Column(db.Float, nullable=False)
+
+    restaurant = db.relationship("Restaurant", back_populates="menu_items")
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'restaurantId': self.restaurant_id,
+            'name': self.name,
+            'description': self.description,
+            'price': self.price
+        }
