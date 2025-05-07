@@ -1,9 +1,10 @@
 import { createBrowserRouter } from 'react-router-dom';
 import LoginFormPage from '../components/LoginFormPage';
 import SignupFormPage from '../components/SignupFormPage';
-import RestaurantList from '../components/RestaurantPage/RestaurantList';
+import RestaurantList from '../components/RestaurantPage/RestaurantPage';
 import Layout from './Layout';
 import HomePage from '../components/HomePage/HomePage';
+import SearchResultsPage from '../components/RestaurantPage/SearchResultsPage';
 
 export const router = createBrowserRouter([
   {
@@ -24,6 +25,10 @@ export const router = createBrowserRouter([
       {
         path: "restaurants",
         element: <RestaurantList />,
+      },
+      {
+        path: "search",
+        element: <SearchResultsPage />,
       },
     ],
   },

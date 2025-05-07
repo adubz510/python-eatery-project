@@ -2,175 +2,199 @@ from app.models import db, MenuItem, environment, SCHEMA
 from sqlalchemy.sql import text
 
 def seed_menu_items():
-    # Demo Diner Menu Items
-    pancake_stack = MenuItem(
+    # Joël Robuchon Menu Items (French cuisine)
+    foie_gras = MenuItem(
         restaurant_id=1,
-        name='Pancake Stack',
-        description='Fluffy pancakes served with maple syrup.',
-        price=8.99
+        name='Foie Gras',
+        description='Delicately seared foie gras with fig jam and toast.',
+        price=24.99
     )
-    classic_burger = MenuItem(
+    tasting_menu = MenuItem(
         restaurant_id=1,
-        name='Classic Burger',
-        description='Beef patty with lettuce, tomato, and house sauce.',
-        price=10.99
+        name='Tasting Menu',
+        description='A multi-course tasting experience showcasing French culinary artistry.',
+        price=99.99
     )
-    grilled_cheese = MenuItem(
+    lobster_ravioli = MenuItem(
         restaurant_id=1,
-        name='Grilled Cheese',
-        description='Cheddar cheese melted between sourdough.',
-        price=6.50
+        name='Lobster Ravioli',
+        description='Handmade ravioli filled with lobster, served in a rich cream sauce.',
+        price=32.99
     )
-    milkshake = MenuItem(
+    truffle_frites = MenuItem(
         restaurant_id=1,
-        name='Milkshake',
-        description='Creamy vanilla milkshake with whipped cream.',
-        price=4.99
-    )
-    chicken_tenders = MenuItem(
-        restaurant_id=1,
-        name='Chicken Tenders',
-        description='Golden-fried chicken tenders with fries.',
-        price=9.25
+        name='Truffle Frites',
+        description='Crispy fries tossed in truffle oil and parmesan.',
+        price=8.50
     )
 
-    # Marnie’s Mediterranean Menu Items
-    falafel_wrap = MenuItem(
+    # Lotus of Siam Menu Items (Thai cuisine)
+    pad_thai = MenuItem(
         restaurant_id=2,
-        name='Falafel Wrap',
-        description='Chickpea patties wrapped with tahini sauce.',
-        price=9.99
-    )
-    hummus_plate = MenuItem(
-        restaurant_id=2,
-        name='Hummus Plate',
-        description='House-made hummus served with pita.',
-        price=7.50
-    )
-    lamb_gyro = MenuItem(
-        restaurant_id=2,
-        name='Lamb Gyro',
-        description='Spiced lamb in a warm pita with tzatziki.',
-        price=11.25
-    )
-    greek_salad = MenuItem(
-        restaurant_id=2,
-        name='Greek Salad',
-        description='Cucumber, tomato, feta, and olives.',
-        price=8.25
-    )
-    baklava = MenuItem(
-        restaurant_id=2,
-        name='Baklava',
-        description='Sweet pastry layered with nuts and honey.',
-        price=5.50
-    )
-
-    # Bobbie’s BBQ Menu Items
-    pulled_pork = MenuItem(
-        restaurant_id=3,
-        name='Pulled Pork Sandwich',
-        description='Slow-cooked pork with BBQ sauce.',
-        price=10.75
-    )
-    brisket_plate = MenuItem(
-        restaurant_id=3,
-        name='Brisket Plate',
-        description='Tender smoked brisket with two sides.',
-        price=14.99
-    )
-    bbq_ribs = MenuItem(
-        restaurant_id=3,
-        name='BBQ Ribs',
-        description='Half rack of ribs with tangy sauce.',
-        price=16.50
-    )
-    mac_cheese = MenuItem(
-        restaurant_id=3,
-        name='Mac & Cheese',
-        description='Southern-style creamy mac and cheese.',
-        price=6.99
-    )
-    coleslaw = MenuItem(
-        restaurant_id=3,
-        name='Coleslaw',
-        description='Crunchy coleslaw with vinegar dressing.',
-        price=3.25
-    )
-
-    # Tommy’s Zen Menu Items
-    orange_chicken = MenuItem(
-        restaurant_id=4,
-        name='Orange Chicken',
-        description='Crispy chicken tossed in orange sauce.',
-        price=9.99
-    )
-    beef_lo_mein = MenuItem(
-        restaurant_id=4,
-        name='Beef Lo Mein',
-        description='Stir-fried noodles with beef and veggies.',
-        price=11.50
-    )
-    general_tsos = MenuItem(
-        restaurant_id=4,
-        name='General Tso\'s Chicken',
-        description='Spicy-sweet glazed chicken.',
-        price=10.75
-    )
-    spring_rolls = MenuItem(
-        restaurant_id=4,
-        name='Vegetable Spring Rolls',
-        description='Crispy rolls filled with fresh veggies.',
-        price=4.99
-    )
-    fried_rice = MenuItem(
-        restaurant_id=4,
-        name='Fried Rice',
-        description='Classic egg fried rice with scallions.',
-        price=6.50
-    )
-
-    # Sammy’s Ramen Menu Items
-    tonkotsu_ramen = MenuItem(
-        restaurant_id=5,
-        name='Tonkotsu Ramen',
-        description='Pork bone broth with chashu and egg.',
+        name='Pad Thai',
+        description='Classic stir-fried rice noodles with shrimp, peanuts, and tamarind sauce.',
         price=13.50
     )
-    shoyu_ramen = MenuItem(
-        restaurant_id=5,
-        name='Shoyu Ramen',
-        description='Soy-based broth with bamboo shoots.',
-        price=12.75
+    green_curry = MenuItem(
+        restaurant_id=2,
+        name='Green Curry',
+        description='Spicy coconut-based curry with chicken and vegetables.',
+        price=14.75
     )
-    spicy_miso_ramen = MenuItem(
-        restaurant_id=5,
-        name='Spicy Miso Ramen',
-        description='Rich miso broth with chili oil.',
-        price=13.99
+    thai_spring_rolls = MenuItem(
+        restaurant_id=2,
+        name='Thai Spring Rolls',
+        description='Crispy spring rolls filled with vegetables and served with sweet chili sauce.',
+        price=6.99
     )
-    gyoza = MenuItem(
-        restaurant_id=5,
-        name='Gyoza',
-        description='Pan-fried dumplings with pork filling.',
-        price=6.25
+    mango_sticky_rice = MenuItem(
+        restaurant_id=2,
+        name='Mango Sticky Rice',
+        description='Sweet sticky rice paired with ripe mango and coconut milk.',
+        price=7.25
     )
-    seaweed_salad = MenuItem(
+
+    # The Buffet at Wynn Menu Items (Buffet)
+    seafood_platter = MenuItem(
+        restaurant_id=3,
+        name='Seafood Platter',
+        description='A selection of shrimp, oysters, and crab legs.',
+        price=29.99
+    )
+    prime_rib = MenuItem(
+        restaurant_id=3,
+        name='Prime Rib',
+        description='Slow-roasted prime rib with au jus and horseradish.',
+        price=22.50
+    )
+    sushi_rolls = MenuItem(
+        restaurant_id=3,
+        name='Sushi Rolls',
+        description='A variety of sushi rolls including tuna, salmon, and crab.',
+        price=18.99
+    )
+    mashed_potatoes = MenuItem(
+        restaurant_id=3,
+        name='Mashed Potatoes',
+        description='Creamy mashed potatoes with garlic and chives.',
+        price=5.99
+    )
+
+    # Carson Kitchen Menu Items (New American)
+    fried_chicken = MenuItem(
+        restaurant_id=4,
+        name='Fried Chicken',
+        description='Crispy fried chicken served with honey and hot sauce.',
+        price=15.99
+    )
+    roasted_vegetables = MenuItem(
+        restaurant_id=4,
+        name='Roasted Vegetables',
+        description='Seasonal vegetables roasted with herbs and olive oil.',
+        price=8.50
+    )
+    short_ribs = MenuItem(
+        restaurant_id=4,
+        name='Short Ribs',
+        description='Slow-braised short ribs with a rich red wine sauce.',
+        price=22.50
+    )
+    sweet_potato_fries = MenuItem(
+        restaurant_id=4,
+        name='Sweet Potato Fries',
+        description='Crispy sweet potato fries served with garlic aioli.',
+        price=6.99
+    )
+
+    # Momofuku Menu Items (Asian Fusion)
+    pork_belly_bao = MenuItem(
         restaurant_id=5,
-        name='Seaweed Salad',
-        description='Chilled seaweed with sesame oil.',
+        name='Pork Belly Bao',
+        description='Soft steamed buns with tender pork belly, hoisin sauce, and cucumber.',
+        price=9.75
+    )
+    ramen = MenuItem(
+        restaurant_id=5,
+        name='Ramen',
+        description='Rich and flavorful ramen broth with noodles, egg, and pork belly.',
+        price=12.50
+    )
+    spicy_tofu = MenuItem(
+        restaurant_id=5,
+        name='Spicy Tofu',
+        description='Crispy tofu served in a spicy sauce with cilantro.',
+        price=10.99
+    )
+    kimchi = MenuItem(
+        restaurant_id=5,
+        name='Kimchi',
+        description='Fermented vegetables, mainly cabbage and radishes, with chili paste.',
+        price=4.50
+    )
+
+    # In-N-Out Burger Menu Items (Fast Food)
+    double_double = MenuItem(
+        restaurant_id=6,
+        name='Double-Double Burger',
+        description='Two beef patties with American cheese, lettuce, tomato, and In-N-Out sauce.',
+        price=7.50
+    )
+    animal_fries = MenuItem(
+        restaurant_id=6,
+        name='Animal Fries',
+        description='Fries topped with melted cheese, grilled onions, and secret sauce.',
         price=4.95
     )
+    milkshake_vanilla = MenuItem(
+        restaurant_id=6,
+        name='Vanilla Milkshake',
+        description='Rich and creamy vanilla milkshake made with real ice cream.',
+        price=5.00
+    )
+    cheeseburger = MenuItem(
+        restaurant_id=6,
+        name='Cheeseburger',
+        description='Single beef patty with cheese, lettuce, tomato, and special sauce.',
+        price=5.25
+    )
 
+    # Eataly Menu Items (Italian Marketplace)
+    margherita_pizza = MenuItem(
+        restaurant_id=7,
+        name='Margherita Pizza',
+        description='Classic pizza with tomato, mozzarella, and fresh basil.',
+        price=12.99
+    )
+    tagliatelle_bolognese = MenuItem(
+        restaurant_id=7,
+        name='Tagliatelle Bolognese',
+        description='Homemade pasta with rich meat sauce.',
+        price=15.50
+    )
+    tiramisu = MenuItem(
+        restaurant_id=7,
+        name='Tiramisu',
+        description='Classic Italian dessert with layers of coffee-soaked sponge and mascarpone.',
+        price=7.99
+    )
+    bruschetta = MenuItem(
+        restaurant_id=7,
+        name='Bruschetta',
+        description='Toasted bread topped with tomatoes, basil, and olive oil.',
+        price=6.50
+    )
+
+    # Add all items to the session
     db.session.add_all([
-        pancake_stack, classic_burger, grilled_cheese, milkshake, chicken_tenders,
-        falafel_wrap, hummus_plate, lamb_gyro, greek_salad, baklava,
-        pulled_pork, brisket_plate, bbq_ribs, mac_cheese, coleslaw,
-        orange_chicken, beef_lo_mein, general_tsos, spring_rolls, fried_rice,
-        tonkotsu_ramen, shoyu_ramen, spicy_miso_ramen, gyoza, seaweed_salad
+        foie_gras, tasting_menu, lobster_ravioli, truffle_frites,
+        pad_thai, green_curry, thai_spring_rolls, mango_sticky_rice,
+        seafood_platter, prime_rib, sushi_rolls, mashed_potatoes,
+        fried_chicken, roasted_vegetables, short_ribs, sweet_potato_fries,
+        pork_belly_bao, ramen, spicy_tofu, kimchi,
+        double_double, animal_fries, milkshake_vanilla, cheeseburger,
+        margherita_pizza, tagliatelle_bolognese, tiramisu, bruschetta
     ])
     db.session.commit()
-
 
 def undo_menu_items():
     if environment == "production":

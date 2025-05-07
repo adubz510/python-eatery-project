@@ -13,6 +13,23 @@
     padding: 16px 32px; 
     align-items: center;
   }
+
+  .browse-btn {
+    background-color: black;
+    color: white;
+    padding: 12px 24px;
+    border: 2px solid rgb(146, 255, 157); /* Neon green like .homepage-title */
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .browse-btn:hover {
+    background-color: #222;
+    transform: scale(1.03);
+  }
   
   .homepage-title {
     display: inline-block;

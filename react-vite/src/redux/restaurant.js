@@ -27,12 +27,21 @@ const deleteRestaurant = (restaurantId) => ({
 
 // Thunks
 export const thunkFetchRestaurants = () => async (dispatch) => {
-  const res = await fetch('/api/restaurants/');
-  if (res.ok) {
-    const data = await res.json();
-    dispatch(loadRestaurants(data));
-  }
-};
+    try {
+      const res = await fetch('/api/restaurants/');
+  
+      if (res.ok) {
+        const data = await res.json();
+        console.log("Restaurants:", data)
+        dispatch(loadRestaurants(data));
+      } else {
+        const errorText = await res.text();
+        console.error('Fetch failed:', res.status, errorText);
+      }
+    } catch (err) {
+      console.error('Unexpected fetch error:', err);
+    }
+  };
 
 export const thunkCreateRestaurant = (restaurantData) => async (dispatch) => {
   const res = await fetch('/api/restaurants/', {

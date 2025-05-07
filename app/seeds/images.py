@@ -2,98 +2,49 @@ from app.models import db, Image, environment, SCHEMA
 from sqlalchemy.sql import text
 
 def seed_images():
-    # Demo Diner Images
-    demo_img1 = Image(
-        url='https://example.com/demo1.jpg',
-        restaurant_id=1,
-        user_id=1
-    )
-    demo_img2 = Image(
-        url='https://example.com/demo2.jpg',
-        restaurant_id=1,
-        user_id=1
-    )
-    demo_img3 = Image(
-        url='https://example.com/demo3.jpg',
+    img1 = Image(
+        url='https://images.unsplash.com/photo-1600891964599-f61ba0e24092',  # French fine dining
         restaurant_id=1,
         user_id=1
     )
 
-    # Marnie's Mediterranean Images
-    marnie_img1 = Image(
-        url='https://example.com/med1.jpg',
+    img2 = Image(
+        url='https://images.unsplash.com/photo-1627308595229-7830a5c91f9f',  # Thai food
         restaurant_id=2,
-        user_id=2
+        user_id=1
     )
-    marnie_img2 = Image(
-        url='https://example.com/med2.jpg',
-        restaurant_id=2,
-        user_id=2
-    )
-    marnie_img3 = Image(
-        url='https://example.com/med3.jpg',
-        restaurant_id=2,
+
+    img3 = Image(
+        url='https://media.istockphoto.com/id/637765812/photo/cuisine-culinary-buffet-dinner-catering-dining-food-celebration.jpg?s=612x612&w=0&k=20&c=7l_HRkrBJ6ewkfYx1rQtNbDDWcf4V8dyo1GbiHmWGYs=',
+        restaurant_id=3,
         user_id=2
     )
 
-    # Bobbie's BBQ Images
-    bobbie_img1 = Image(
-        url='https://example.com/bbq1.jpg',
-        restaurant_id=3,
-        user_id=3
+    img4 = Image(
+        url='https://images.unsplash.com/photo-1525610553991-2bede1a236e2',  # American cuisine
+        restaurant_id=4,
+        user_id=2
     )
-    bobbie_img2 = Image(
-        url='https://example.com/bbq2.jpg',
-        restaurant_id=3,
-        user_id=3
-    )
-    bobbie_img3 = Image(
-        url='https://example.com/bbq3.jpg',
-        restaurant_id=3,
+
+    img5 = Image(
+        url='https://images.unsplash.com/photo-1553621042-f6e147245754',  # Asian fusion
+        restaurant_id=5,
         user_id=3
     )
 
-    # Tommy's Zen Images
-    tommy_img1 = Image(
-        url='https://example.com/zen1.jpg',
-        restaurant_id=4,
-        user_id=4
-    )
-    tommy_img2 = Image(
-        url='https://example.com/zen2.jpg',
-        restaurant_id=4,
-        user_id=4
-    )
-    tommy_img3 = Image(
-        url='https://example.com/zen3.jpg',
-        restaurant_id=4,
+    img6 = Image(
+        url='https://images.unsplash.com/photo-1586190848861-99aa4a171e90',  # Fast food
+        restaurant_id=6,
         user_id=4
     )
 
-    # Sammy's Ramen Images
-    sammy_img1 = Image(
-        url='https://example.com/ramen1.jpg',
-        restaurant_id=5,
-        user_id=5
-    )
-    sammy_img2 = Image(
-        url='https://example.com/ramen2.jpg',
-        restaurant_id=5,
-        user_id=5
-    )
-    sammy_img3 = Image(
-        url='https://example.com/ramen3.jpg',
-        restaurant_id=5,
+    img7 = Image(
+        url='https://images.unsplash.com/photo-1550547660-d9450f859349',  # Italian market
+        restaurant_id=7,
         user_id=5
     )
 
-    db.session.add_all([
-        demo_img1, demo_img2, demo_img3,
-        marnie_img1, marnie_img2, marnie_img3,
-        bobbie_img1, bobbie_img2, bobbie_img3,
-        tommy_img1, tommy_img2, tommy_img3,
-        sammy_img1, sammy_img2, sammy_img3
-    ])
+    db.session.add_all([img1, img2, img3, img4, img5, img6, img7])
     db.session.commit()
 
 

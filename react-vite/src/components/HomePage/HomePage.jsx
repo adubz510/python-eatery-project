@@ -8,16 +8,17 @@ import ProfileButton from '../Navigation/ProfileButton';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
 
-
 const HomePage = () => {
   const navigate = useNavigate();
   const { setModalContent } = useModal(); // Using modal context if needed
-
   const user = useSelector((state) => state.session.user); // Accessing user from Redux
 
+  const [address, setAddress] = React.useState("");
+
   const handleSearch = () => {
-    // Navigate to restaurants page (can add query params here)
-    navigate('/restaurants');
+    if (address.trim()) {
+      navigate(`/restaurants?address=${encodeURIComponent(address)}`);
+    }
   };
 
   const openLoginModal = () => {
@@ -31,17 +32,24 @@ const HomePage = () => {
   return (
     <div className="homepage">    
       <header className="homepage-header">
-      <div className="logo">
-        <ProfileButton />
-      </div>
+        <div className="logo">
+          <ProfileButton />
+        </div>
 
-      {!user && (
-      <div className="auth-buttons">
-        <button className="login-btn" onClick={openLoginModal}>Log In</button>
-        <button className="signup-btn" onClick={openSignupModal}>Sign Up</button>
-      </div>
-      )}
+        <div className="header-buttons">
+          <button className="browse-btn" onClick={() => navigate('/restaurants')}>
+          Browse Restaurants
+        </button>
 
+        
+
+        {!user && (
+          <div className="auth-buttons">
+            <button className="login-btn" onClick={openLoginModal}>Log In</button>
+            <button className="signup-btn" onClick={openSignupModal}>Sign Up</button>
+          </div>
+        )}
+        </div>
       </header>
 
       <main className="homepage-main">
@@ -54,6 +62,8 @@ const HomePage = () => {
               type="text"
               placeholder="Enter delivery address"
               className="address-input"
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
             />
           </div>
           <button className="search-btn" onClick={handleSearch}>Search here</button>

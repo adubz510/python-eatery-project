@@ -4,7 +4,6 @@ from datetime import datetime
 
 
 def seed_restaurants():
-    # Restaurant data for Las Vegas
     restaurant_1 = Restaurant(
         owner_id=1,
         name='Joël Robuchon',
@@ -20,7 +19,7 @@ def seed_restaurants():
     )
 
     restaurant_2 = Restaurant(
-        owner_id=2,
+        owner_id=1,
         name='Lotus of Siam',
         description='Serving up classic Thai dishes in a relaxed, family-friendly space.',
         category='Thai',
@@ -34,7 +33,7 @@ def seed_restaurants():
     )
 
     restaurant_3 = Restaurant(
-        owner_id=3,
+        owner_id=2,
         name='The Buffet at Wynn',
         description='Lavish buffet offering a wide selection of international dishes.',
         category='Buffet',
@@ -48,7 +47,7 @@ def seed_restaurants():
     )
 
     restaurant_4 = Restaurant(
-        owner_id=4,
+        owner_id=2,
         name='Carson Kitchen',
         description='Inventive New American fare in a trendy setting.',
         category='American',
@@ -62,7 +61,7 @@ def seed_restaurants():
     )
 
     restaurant_5 = Restaurant(
-        owner_id=5,
+        owner_id=3,
         name='Momofuku',
         description='Creative Asian-inspired cuisine in an upscale, modern environment.',
         category='Asian Fusion',
@@ -75,9 +74,8 @@ def seed_restaurants():
         lng=-115.1748
     )
 
-    # Budget restaurants with $ and $$ price range
     restaurant_6 = Restaurant(
-        owner_id=6,
+        owner_id=4,
         name='In-N-Out Burger',
         description='Popular fast-food chain serving burgers, fries, and shakes.',
         category='Fast Food',
@@ -91,7 +89,7 @@ def seed_restaurants():
     )
 
     restaurant_7 = Restaurant(
-        owner_id=7,
+        owner_id=5,
         name='Eataly',
         description='An Italian marketplace featuring a variety of restaurants, cafes, and food counters.',
         category='Italian',

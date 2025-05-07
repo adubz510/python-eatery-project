@@ -1,13 +1,18 @@
 from flask import Blueprint, request, jsonify
 from flask_login import login_required, current_user
+from sqlalchemy.orm import joinedload
 from app.models import db, Restaurant
 
-restaurant_routes = Blueprint('restaurants', __name__, url_prefix='/api/restaurants')
+restaurant_routes = Blueprint('restaurants', __name__)
 
 # GET all restaurants
 @restaurant_routes.route('/', methods=['GET'])
 def get_all_restaurants():
-    restaurants = Restaurant.query.all()
+    restaurants = Restaurant.query.options(
+        joinedload(Restaurant.images),
+        joinedload(Restaurant.menu_items),
+        joinedload(Restaurant.reviews)
+    ).all()
     return jsonify([restaurant.to_dict() for restaurant in restaurants]), 200
 
 
