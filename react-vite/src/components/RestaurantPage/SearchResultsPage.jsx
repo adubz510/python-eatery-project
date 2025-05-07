@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 import { thunkFetchRestaurants } from '../../redux/restaurant';
-import './RestaurantPage.css'; // assuming shared styling
+import './RestaurantPage.css'; // shared styles
 
 const SearchResultsPage = () => {
   const dispatch = useDispatch();
@@ -11,7 +11,11 @@ const SearchResultsPage = () => {
     dispatch(thunkFetchRestaurants());
   }, [dispatch]);
 
-  const restaurants = useSelector((state) => Object.values(state.restaurants || {}));
+  // ✅ Updated selector to use allRestaurants
+  const restaurants = useSelector((state) =>
+    Object.values(state.restaurants.allRestaurants || {})
+  );
+
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const searchTerm = queryParams.get('query')?.toLowerCase() || '';

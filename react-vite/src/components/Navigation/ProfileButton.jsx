@@ -6,7 +6,7 @@ import OpenModalMenuItem from "./OpenModalMenuItem";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
 import { useNavigate } from "react-router-dom"; 
-import "./ProfileButton.css"
+import "./ProfileButton.css";
 
 function ProfileButton() {
   const dispatch = useDispatch();
@@ -43,7 +43,7 @@ function ProfileButton() {
     e.preventDefault();
     dispatch(thunkLogout()); // Dispatch the logout action
     closeMenu(); // Close the dropdown menu
-    navigate("/"); // Redirect to the homepage after logging out (optional)
+    navigate("/"); // Redirect to the homepage after logging out
   };
 
   return (
@@ -57,6 +57,9 @@ function ProfileButton() {
             <>
               <li>{user.username}</li>
               <li>{user.email}</li>
+              <li>
+                <button onClick={() => navigate(`/account`)} className="account-button">Account</button>
+              </li>
               <li className="logout-li">
                 <button onClick={logout} className="Logout-button">Log Out</button>
               </li>
@@ -78,7 +81,7 @@ function ProfileButton() {
         </ul>
       )}
     </div>
-      );
+  );
 }
 
 export default ProfileButton;

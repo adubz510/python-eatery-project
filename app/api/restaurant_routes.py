@@ -82,3 +82,14 @@ def delete_restaurant(restaurant_id):
     db.session.commit()
 
     return jsonify({'message': 'Restaurant deleted'}), 200
+
+# GET restaurants owned by the current user
+@restaurant_routes.route('/my-restaurants', methods=['GET'])
+@login_required
+def get_user_restaurants():
+    user_restaurants = Restaurant.query.filter(Restaurant.owner_id == current_user.id).all()
+    
+    # Convert restaurants to dictionary format
+    restaurants_dict = [restaurant.to_dict() for restaurant in user_restaurants]
+    
+    return jsonify(restaurants_dict), 200

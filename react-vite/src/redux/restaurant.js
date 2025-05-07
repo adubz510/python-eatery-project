@@ -3,6 +3,7 @@ const LOAD_RESTAURANTS = 'restaurants/LOAD_RESTAURANTS';
 const ADD_RESTAURANT = 'restaurants/ADD_RESTAURANT';
 const UPDATE_RESTAURANT = 'restaurants/UPDATE_RESTAURANT';
 const DELETE_RESTAURANT = 'restaurants/DELETE_RESTAURANT';
+const LOAD_USER_RESTAURANTS = 'restaurants/LOAD_USER_RESTAURANTS';
 
 // Action Creators
 const loadRestaurants = (restaurants) => ({
@@ -25,6 +26,11 @@ const deleteRestaurant = (restaurantId) => ({
   payload: restaurantId
 });
 
+const loadUserRestaurants = (restaurants) => ({
+    type: LOAD_USER_RESTAURANTS,
+    restaurants,
+  });
+
 // Thunks
 export const thunkFetchRestaurants = () => async (dispatch) => {
     try {
@@ -34,6 +40,23 @@ export const thunkFetchRestaurants = () => async (dispatch) => {
         const data = await res.json();
         console.log("Restaurants:", data)
         dispatch(loadRestaurants(data));
+      } else {
+        const errorText = await res.text();
+        console.error('Fetch failed:', res.status, errorText);
+      }
+    } catch (err) {
+      console.error('Unexpected fetch error:', err);
+    }
+  };
+
+  export const thunkFetchUserRestaurants = () => async (dispatch) => {
+    try {
+      const res = await fetch('/api/restaurants/my-restaurants');
+  
+      if (res.ok) {
+        const data = await res.json();
+        console.log("User's Restaurants:", data);
+        dispatch(loadUserRestaurants(data)); // You’ll need a separate action for this
       } else {
         const errorText = await res.text();
         console.error('Fetch failed:', res.status, errorText);
@@ -91,29 +114,68 @@ export const thunkDeleteRestaurant = (restaurantId) => async (dispatch) => {
 };
 
 // Reducer
-const initialState = {};
+// Initial state
+const initialState = {
+    allRestaurants: {},
+    userRestaurants: {}
+  };
+  
+  // Reducer
+  function restaurantsReducer(state = initialState, action) {
+    switch (action.type) {
+      case LOAD_RESTAURANTS: {
+        const all = {};
+        action.payload.forEach(restaurant => {
+          all[restaurant.id] = restaurant;
+        });
+        return {
+          ...state,
+          allRestaurants: all
+        };
+      }
 
-function restaurantsReducer(state = initialState, action) {
-  switch (action.type) {
-    case LOAD_RESTAURANTS: {
-      const newState = {};
-      action.payload.forEach(restaurant => {
-        newState[restaurant.id] = restaurant;
-      });
-      return newState;
+      case LOAD_USER_RESTAURANTS: {
+        const user = {};
+        if (action.restaurants && Array.isArray(action.restaurants)) {
+            action.restaurants.forEach((restaurant) => {
+              user[restaurant.id] = restaurant;
+            });
+          }
+          return {
+            ...state,
+            userRestaurants: user
+          };
+        }
+
+      case ADD_RESTAURANT:
+      case UPDATE_RESTAURANT: {
+        return {
+          ...state,
+          allRestaurants: {
+            ...state.allRestaurants,
+            [action.payload.id]: action.payload
+          },
+          userRestaurants: {
+            ...state.userRestaurants,
+            [action.payload.id]: action.payload
+          }
+        };
+      }
+      
+      case DELETE_RESTAURANT: {
+        const all = { ...state.allRestaurants };
+        const user = { ...state.userRestaurants };
+        delete all[action.payload];
+        delete user[action.payload];
+        return {
+          ...state,
+          allRestaurants: all,
+          userRestaurants: user
+        };
+      }
+      default:
+        return state;
     }
-    case ADD_RESTAURANT:
-      return { ...state, [action.payload.id]: action.payload };
-    case UPDATE_RESTAURANT:
-      return { ...state, [action.payload.id]: action.payload };
-    case DELETE_RESTAURANT: {
-      const newState = { ...state };
-      delete newState[action.payload];
-      return newState;
-    }
-    default:
-      return state;
   }
-}
-
-export default restaurantsReducer
+  
+  export default restaurantsReducer;

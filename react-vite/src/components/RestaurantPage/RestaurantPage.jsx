@@ -6,7 +6,12 @@ import "./RestaurantPage.css";
 
 const RestaurantList = () => {
   const dispatch = useDispatch();
-  const restaurants = useSelector(state => Object.values(state.restaurants || {}));
+
+  // 🔧 Pull from allRestaurants in the Redux state
+  const restaurants = useSelector(state =>
+    Object.values(state.restaurants.allRestaurants || {})
+  );
+
   const [selectedCategory, setSelectedCategory] = useState("All");
 
   useEffect(() => {
@@ -28,7 +33,7 @@ const RestaurantList = () => {
     <div className="restaurant-list-container">
       <h1>All Restaurants</h1>
 
-      {/* Horizontal Category Bar */}
+      {/* Category Filter Bar */}
       <div className="category-bar">
         {allCategories.map(category => (
           <button

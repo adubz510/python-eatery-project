@@ -5,6 +5,7 @@ import RestaurantList from '../components/RestaurantPage/RestaurantPage';
 import Layout from './Layout';
 import HomePage from '../components/HomePage/HomePage';
 import SearchResultsPage from '../components/RestaurantPage/SearchResultsPage';
+import AccountPage from '../components/AccountPage/AccountPage';
 
 export const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ export const router = createBrowserRouter([
         path: "search",
         element: <SearchResultsPage />,
       },
+      {
+        path: "account",
+        element: <AccountPage />,
+      }
     ],
   },
 ]);
