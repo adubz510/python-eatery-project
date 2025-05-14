@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify
 from flask_login import login_required, current_user
 from sqlalchemy.orm import joinedload
-from app.models import db, Restaurant
+from app.models import db, Restaurant, Image
 
 restaurant_routes = Blueprint('restaurants', __name__)
 
@@ -14,6 +14,20 @@ def get_all_restaurants():
         joinedload(Restaurant.reviews)
     ).all()
     return jsonify([restaurant.to_dict() for restaurant in restaurants]), 200
+
+# GET a specific restaurant by ID
+@restaurant_routes.route('/<int:restaurant_id>', methods=['GET'])
+def get_restaurant_by_id(restaurant_id):
+    restaurant = Restaurant.query.options(
+        joinedload(Restaurant.images),
+        joinedload(Restaurant.menu_items),
+        joinedload(Restaurant.reviews)
+    ).get(restaurant_id)
+
+    if restaurant is None:
+        return jsonify({'error': 'Restaurant not found'}), 404
+    
+    return jsonify(restaurant.to_dict()), 200
 
 
 # POST create a new restaurant
@@ -39,6 +53,16 @@ def create_restaurant():
     db.session.add(new_restaurant)
     db.session.commit()
 
+    image_url = data.get('imageUrl')
+    if image_url:
+        new_image = Image(
+            url=image_url,
+            restaurant_id=new_restaurant.id,
+            user_id=current_user.id
+        )
+        db.session.add(new_image)
+        db.session.commit()
+
     return new_restaurant.to_dict(), 201
 
 
@@ -53,6 +77,7 @@ def update_restaurant(restaurant_id):
 
     data = request.get_json()
 
+    # Only update fields if provided
     restaurant.name = data.get('name', restaurant.name)
     restaurant.description = data.get('description', restaurant.description)
     restaurant.category = data.get('category', restaurant.category)
@@ -63,6 +88,19 @@ def update_restaurant(restaurant_id):
     restaurant.zip_code = data.get('zipCode', restaurant.zip_code)
     restaurant.lat = data.get('lat', restaurant.lat)
     restaurant.lng = data.get('lng', restaurant.lng)
+
+    image_url = data.get('imageUrl')
+    if image_url:
+        existing_image = restaurant.images[0] if restaurant.images else None
+        if existing_image:
+            existing_image.url = image_url
+        else:
+            new_image = Image(
+                url=image_url,
+                restaurant_id=restaurant.id,
+                user_id=current_user.id
+            )
+            db.session.add(new_image)
 
     db.session.commit()
 

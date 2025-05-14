@@ -1,17 +1,17 @@
 import React from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux'; 
 import { FaLocationArrow } from 'react-icons/fa';
 import './HomePage.css';
-import { useModal } from '../../context/Modal'; // For modal context 
+import { useModal } from '../../context/Modal'; 
 import ProfileButton from '../Navigation/ProfileButton';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
 
 const HomePage = () => {
   const navigate = useNavigate();
-  const { setModalContent } = useModal(); // Using modal context if needed
-  const user = useSelector((state) => state.session.user); // Accessing user from Redux
+  const { setModalContent } = useModal();
+  const user = useSelector((state) => state.session.user);
 
   const [address, setAddress] = React.useState("");
 
@@ -36,20 +36,12 @@ const HomePage = () => {
           <ProfileButton />
         </div>
 
-        <div className="header-buttons">
-          <button className="browse-btn" onClick={() => navigate('/restaurants')}>
-          Browse Restaurants
-        </button>
-
-        
-
         {!user && (
           <div className="auth-buttons">
             <button className="login-btn" onClick={openLoginModal}>Log In</button>
             <button className="signup-btn" onClick={openSignupModal}>Sign Up</button>
           </div>
         )}
-        </div>
       </header>
 
       <main className="homepage-main">

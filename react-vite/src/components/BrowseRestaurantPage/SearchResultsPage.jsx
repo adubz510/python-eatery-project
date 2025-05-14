@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 import { thunkFetchRestaurants } from '../../redux/restaurant';
-import './RestaurantPage.css'; // shared styles
+import './BrowseRestaurantPage.css'; // shared styles
 
 const SearchResultsPage = () => {
   const dispatch = useDispatch();
@@ -11,7 +11,6 @@ const SearchResultsPage = () => {
     dispatch(thunkFetchRestaurants());
   }, [dispatch]);
 
-  // ✅ Updated selector to use allRestaurants
   const restaurants = useSelector((state) =>
     Object.values(state.restaurants.allRestaurants || {})
   );
@@ -30,12 +29,12 @@ const SearchResultsPage = () => {
   });
 
   if (filteredRestaurants.length === 0) {
-    return <div className="restaurant-list-container">No results found for "{searchTerm}"</div>;
+    return <div className="restaurant-list-container">{`No results found for "${searchTerm}"`}</div>;
   }
 
   return (
     <div className="restaurant-list-container">
-      <h1>Search Results for "{searchTerm}"</h1>
+      <h1>{`Search Results for "${searchTerm}"`}</h1>
       <div className="restaurant-grid">
         {filteredRestaurants.map((restaurant) => (
           <Link

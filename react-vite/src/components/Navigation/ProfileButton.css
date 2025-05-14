@@ -39,6 +39,10 @@
     text-align: center;
     list-style: none;
   }
+
+  .profile-dropdown li:hover {
+    cursor: pointer;
+  }
   
   .profile-dropdown button {
     width: 100%;

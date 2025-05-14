@@ -1,11 +1,13 @@
 import { createBrowserRouter } from 'react-router-dom';
 import LoginFormPage from '../components/LoginFormPage';
 import SignupFormPage from '../components/SignupFormPage';
-import RestaurantList from '../components/RestaurantPage/RestaurantPage';
+import RestaurantList from '../components/BrowseRestaurantPage/BrowseRestaurantPage';
 import Layout from './Layout';
 import HomePage from '../components/HomePage/HomePage';
-import SearchResultsPage from '../components/RestaurantPage/SearchResultsPage';
+import SearchResultsPage from '../components/BrowseRestaurantPage/SearchResultsPage';
 import AccountPage from '../components/AccountPage/AccountPage';
+import RestaurantDetailsPage from '../components/RestaurantDetailsPage/RestaurantDetailsPage';
+
 
 export const router = createBrowserRouter([
   {
@@ -28,13 +30,17 @@ export const router = createBrowserRouter([
         element: <RestaurantList />,
       },
       {
+        path: "restaurants/:restaurantId",
+        element: <RestaurantDetailsPage />,
+      },
+      {
         path: "search",
         element: <SearchResultsPage />,
       },
       {
         path: "account",
         element: <AccountPage />,
-      }
+      },
     ],
   },
 ]);

@@ -4,6 +4,8 @@ const ADD_RESTAURANT = 'restaurants/ADD_RESTAURANT';
 const UPDATE_RESTAURANT = 'restaurants/UPDATE_RESTAURANT';
 const DELETE_RESTAURANT = 'restaurants/DELETE_RESTAURANT';
 const LOAD_USER_RESTAURANTS = 'restaurants/LOAD_USER_RESTAURANTS';
+const LOAD_RESTAURANT_BY_ID = 'restaurants/LOAD_RESTAURANT_BY_ID';
+
 
 // Action Creators
 const loadRestaurants = (restaurants) => ({
@@ -31,6 +33,11 @@ const loadUserRestaurants = (restaurants) => ({
     restaurants,
   });
 
+  const loadRestaurantById = (restaurant) => ({
+    type: LOAD_RESTAURANT_BY_ID,
+    payload: restaurant
+  });
+
 // Thunks
 export const thunkFetchRestaurants = () => async (dispatch) => {
     try {
@@ -38,7 +45,7 @@ export const thunkFetchRestaurants = () => async (dispatch) => {
   
       if (res.ok) {
         const data = await res.json();
-        console.log("Restaurants:", data)
+        // console.log("Restaurants:", data)
         dispatch(loadRestaurants(data));
       } else {
         const errorText = await res.text();
@@ -55,8 +62,24 @@ export const thunkFetchRestaurants = () => async (dispatch) => {
   
       if (res.ok) {
         const data = await res.json();
-        console.log("User's Restaurants:", data);
+        // console.log("User's Restaurants:", data);
         dispatch(loadUserRestaurants(data)); // You’ll need a separate action for this
+      } else {
+        const errorText = await res.text();
+        console.error('Fetch failed:', res.status, errorText);
+      }
+    } catch (err) {
+      console.error('Unexpected fetch error:', err);
+    }
+  };
+
+  export const thunkFetchRestaurantById = (restaurantId) => async (dispatch) => {
+    try {
+      const res = await fetch(`/api/restaurants/${restaurantId}`);
+  
+      if (res.ok) {
+        const data = await res.json();
+        dispatch(loadRestaurantById(data));
       } else {
         const errorText = await res.text();
         console.error('Fetch failed:', res.status, errorText);
@@ -134,6 +157,13 @@ const initialState = {
         };
       }
 
+      case LOAD_RESTAURANT_BY_ID: {
+        return {
+          ...state,
+          restaurantById: action.payload
+        };
+      }
+
       case LOAD_USER_RESTAURANTS: {
         const user = {};
         if (action.restaurants && Array.isArray(action.restaurants)) {
@@ -161,7 +191,7 @@ const initialState = {
           }
         };
       }
-      
+
       case DELETE_RESTAURANT: {
         const all = { ...state.allRestaurants };
         const user = { ...state.userRestaurants };

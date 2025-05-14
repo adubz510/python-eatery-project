@@ -19,6 +19,14 @@ function Navigation() {
     <nav className="nav-wrapper">
       <div className="nav-left">
         <NavLink to="/" className="nav-link">Home</NavLink>
+
+        <button
+          className="browse-btn"
+          onClick={() => navigate("/restaurants")}
+        >
+          Browse Restaurants
+        </button>
+
         <div className="profile-button-wrapper">
           <ProfileButton />
         </div>

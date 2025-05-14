@@ -14,11 +14,9 @@ export default function Layout() {
     dispatch(thunkAuthenticate()).then(() => setIsLoaded(true));
   }, [dispatch]);
 
-  const isHomePage = location.pathname === "/";
-
   return (
     <ModalProvider>
-      {!isHomePage && <Navigation />}
+      {<Navigation />}
       {isLoaded && <Outlet />}
       <Modal />
     </ModalProvider>

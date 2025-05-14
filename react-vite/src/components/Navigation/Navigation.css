@@ -1,3 +1,23 @@
+.browse-btn {
+  background-color: black;
+  color: white;
+  padding: 12px 24px;
+  border: 2px solid rgb(146, 255, 157); /* Neon green like .homepage-title */
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  position: absolute; /* Make the button position absolute */
+  top: 16px; /* Position it 16px from the top */
+  right: 32px; /* Position it 32px from the right */
+}
+
+.browse-btn:hover {
+  background-color: #222;
+  transform: scale(1.03);
+}
+
 .nav-wrapper {
   display: flex;
   justify-content: space-between;
@@ -7,6 +27,7 @@
   border-bottom: 1px solid #ccc;
   flex-wrap: wrap;
   gap: 16px;
+  position: relative; /* Ensure the nav-wrapper is positioned relative to its children */
 }
 
 .nav-left {

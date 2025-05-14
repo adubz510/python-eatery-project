@@ -63,16 +63,16 @@
 .category-bar {
   display: flex;
   overflow-x: auto;
-  gap: 1rem;
-  padding: 1rem 0;
-  margin-bottom: 1.5rem;
+  gap: 16px;
+  padding: 16px 0;
+  margin-bottom: 20px;
   border-bottom: 1px solid #ccc;
 }
 
 .category-tab {
   flex-shrink: 0;
-  padding: 0.6rem 1.2rem;
-  font-size: 1rem;
+  padding: 8px 18px;
+  font-size: 16px;
   background-color: #f0f0f0;
   border: none;
   border-radius: 999px;

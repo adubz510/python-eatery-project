@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { thunkFetchRestaurants } from '../../redux/restaurant';
 import { Link } from 'react-router-dom';
-import "./RestaurantPage.css";
+import "./BrowseRestaurantPage.css";
 
 const RestaurantList = () => {
   const dispatch = useDispatch();

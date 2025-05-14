@@ -4,7 +4,6 @@ from .restaurants import seed_restaurants, undo_restaurants
 from .images import seed_images, undo_images
 from .reviews import seed_reviews, undo_reviews
 from .menuItems import seed_menu_items, undo_menu_items
-from .reviewImages import seed_review_images, undo_review_images
 
 from app.models.db import db, environment, SCHEMA
 
@@ -26,13 +25,11 @@ def seed():
         undo_images()
         undo_reviews()
         undo_menu_items()
-        undo_review_images()
     seed_users()
     seed_restaurants()
     seed_images()
     seed_reviews()
     seed_menu_items()
-    seed_review_images()
     # Add other seed functions here
 
 
@@ -44,5 +41,4 @@ def undo():
     undo_images()
     undo_reviews()
     undo_menu_items()
-    undo_review_images()
     # Add other undo functions here
