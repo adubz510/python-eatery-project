@@ -23,6 +23,7 @@
 }
 
 .browse-restaurant-btn {
+  display:flex;
   align-items: center;
   gap: 8px;
   background-color: black;
@@ -38,7 +39,8 @@
   right: 32px; 
 }
 
-.browse-restaurant-btn-icon {
+.browse-icon {
+  align-items: center;
   font-size: 32px; 
 }
 
