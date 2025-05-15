@@ -4,6 +4,15 @@
   margin: 0 auto;
 }
 
+.restaurant-list-noresult {
+  font-size: 44px !important; /* or larger, like 32px */
+  font-weight: bold !important;
+  color: #000000; /* red tone for attention, or any you prefer */
+  text-align: center;
+  margin-top: 20px;
+  padding: 40px;
+}
+
 .restaurant-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));

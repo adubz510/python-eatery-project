@@ -2,8 +2,7 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 import { thunkFetchRestaurants } from '../../redux/restaurant';
-import './BrowseRestaurantPage.css'; // shared styles
-
+import './BrowseRestaurantPage.css'; 
 const SearchResultsPage = () => {
   const dispatch = useDispatch();
 
@@ -17,19 +16,29 @@ const SearchResultsPage = () => {
 
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
-  const searchTerm = queryParams.get('query')?.toLowerCase() || '';
+  const searchTerm = queryParams.get('query')?.toLowerCase();
 
-  const filteredRestaurants = restaurants.filter((restaurant) => {
-    const nameMatch = restaurant.name?.toLowerCase().includes(searchTerm);
-    const categoryMatch = restaurant.category?.toLowerCase().includes(searchTerm);
-    const menuMatch = restaurant.menuItems?.some(item =>
-      item.name?.toLowerCase().includes(searchTerm)
-    );
-    return nameMatch || categoryMatch || menuMatch;
-  });
+
+  const wordMatches = (text) => {
+    if (!text) return false;
+    return text
+      .toLowerCase()
+      .split(/\s+/) // split into words
+      .some(word => word === searchTerm);
+  };
+  
+  const filteredRestaurants =
+    restaurants.filter((restaurant) => {
+      const nameMatch = wordMatches(restaurant.name);
+      const categoryMatch = wordMatches(restaurant.category);
+      const menuMatch = restaurant.menuItems?.some(item => wordMatches(item.name));
+      return nameMatch || categoryMatch || menuMatch;
+    });
+
+ 
 
   if (filteredRestaurants.length === 0) {
-    return <div className="restaurant-list-container">{`No results found for "${searchTerm}"`}</div>;
+    return <div className="restaurant-list-noresult">{`No results found for "${searchTerm}"`}</div>;
   }
 
   return (

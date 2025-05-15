@@ -1,21 +1,51 @@
-.browse-btn {
+
+.browse-btn { 
+  display: flex;
+  align-items: center;
+  gap: 8px;
   background-color: black;
   color: white;
   padding: 12px 24px;
-  border: 2px solid rgb(146, 255, 157); /* Neon green like .homepage-title */
+  border: 2px solid rgb(146, 255, 157);
   border-radius: 10px;
   font-weight: bold;
   cursor: pointer;
   font-size: 16px;
   transition: background-color 0.3s ease, transform 0.2s ease;
-  position: absolute; /* Make the button position absolute */
-  top: 16px; /* Position it 16px from the top */
-  right: 32px; /* Position it 32px from the right */
+  position: absolute; 
+  top: 16px; 
+  right: 32px; 
 }
 
 .browse-btn:hover {
   background-color: #222;
   transform: scale(1.03);
+}
+
+.browse-restaurant-btn {
+  align-items: center;
+  gap: 8px;
+  background-color: black;
+  color: white;
+  padding: 12px 24px;
+  border: 2px solid rgb(146, 255, 157);
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  top: 16px; 
+  right: 32px; 
+}
+
+.browse-restaurant-btn-icon {
+  font-size: 32px; 
+}
+
+.nav-button-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .nav-wrapper {
@@ -27,7 +57,7 @@
   border-bottom: 1px solid #ccc;
   flex-wrap: wrap;
   gap: 16px;
-  position: relative; /* Ensure the nav-wrapper is positioned relative to its children */
+  position: relative; 
 }
 
 .nav-left {
@@ -35,6 +65,7 @@
   flex-direction: column;
   align-items: flex-start;
 }
+
 
 .nav-link {
   font-size: 18px;
@@ -54,7 +85,8 @@
   gap: 16px;
   align-items: center;
   flex: 1;
-  max-width: 600px;
+  max-width: 100%;
+  margin-top: 100px;
 }
 
 .input-group {
@@ -94,3 +126,4 @@
 .search-btn:hover {
   background-color: #222;
 }
+
