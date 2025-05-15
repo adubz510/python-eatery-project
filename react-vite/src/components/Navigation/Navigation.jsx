@@ -1,14 +1,18 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { useModal } from "../../context/Modal";
 import ProfileButton from "./ProfileButton";
 import { useState } from "react";
 import { SiUbereats } from "react-icons/si";
+import LoginFormModal from "../LoginFormModal";
+import SignupFormModal from "../SignupFormModal";
 import "./Navigation.css";
 
 function Navigation() {
   const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
   const user = useSelector((state) => state.session.user);
+  const { setModalContent } = useModal();
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
