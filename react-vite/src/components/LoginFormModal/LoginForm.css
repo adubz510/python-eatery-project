@@ -65,3 +65,24 @@ p {
   font-size: 13.6px;
   margin-top: -8px;
 }
+
+.demo-button {
+    background-color: #00cc66;
+    color: white;
+    padding: 14.4px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+  }
+  
+  .demo-button:hover {
+    background-color: #00b359;
+    transform: translateY(-2px);
+  }
+  
+  .demo-button:active {
+    transform: translateY(1px);
+  }
