@@ -45,7 +45,6 @@ export const thunkFetchRestaurants = () => async (dispatch) => {
   
       if (res.ok) {
         const data = await res.json();
-        // console.log("Restaurants:", data)
         dispatch(loadRestaurants(data));
       } else {
         const errorText = await res.text();
@@ -62,8 +61,7 @@ export const thunkFetchRestaurants = () => async (dispatch) => {
   
       if (res.ok) {
         const data = await res.json();
-        // console.log("User's Restaurants:", data);
-        dispatch(loadUserRestaurants(data)); // You’ll need a separate action for this
+        dispatch(loadUserRestaurants(data)); 
       } else {
         const errorText = await res.text();
         console.error('Fetch failed:', res.status, errorText);
@@ -136,7 +134,6 @@ export const thunkDeleteRestaurant = (restaurantId) => async (dispatch) => {
   }
 };
 
-// Reducer
 // Initial state
 const initialState = {
     allRestaurants: {},

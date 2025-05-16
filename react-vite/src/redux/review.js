@@ -90,7 +90,7 @@ export const thunkDeleteReview = (reviewId) => async (dispatch) => {
 
 // Reducer
 const initialState = {
-  restaurantReviews: {} // keyed by review ID
+  restaurantReviews: {} 
 };
 
 function reviewsReducer(state = initialState, action) {
