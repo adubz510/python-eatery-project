@@ -167,6 +167,64 @@
     color: #000 !important;
   }
 
+  .menu-item-actions,
+.review-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.update-button,
+.delete-button {
+  padding: 8px 12px;
+  font-size: 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* Edit button style */
+.update-button {
+  background-color: #4caf50;
+  color: white;
+}
+
+.update-button:hover {
+  background-color: #43a047;
+}
+
+/* Delete button style */
+.delete-button {
+  background-color: #f44336;
+  color: white;
+}
+
+.delete-button:hover {
+  background-color: #d32f2f;
+}
+
+.create-menu-item-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: black;
+  color: white;
+  padding: 12px 24px;
+  border: 2px solid rgb(146, 255, 157) ;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  margin-bottom: 24px; /* Add spacing before the menu list */
+}
+
+.create-menu-item-button:hover {
+  background-color: #222;
+  transform: scale(1.03);
+}
+
+
   @media (max-width: 768px) {
     .restaurant-details {
       padding: 16px;
