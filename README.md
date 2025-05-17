@@ -6,6 +6,17 @@ https://python-eatery-project.onrender.com
 ## Backend Repository
 [_This repository includes both frontend and backend code._](https://github.com/adubz510/python-eatery-project.git)
 
+## 🗃 Database Schema
+
+- User: id, username, email, hashed_password
+- Restaurant: id, owner_id, name, description, category, price_range, address, city, state, zip_code, lat, lng
+- Image: id, restaurant_id, user_id (FK → User), url
+- MenuItem: id, restaurant_id, name, description, price, image_url
+- Review: id, restaurant_id, user_id, rating, comment, created_at, updated_at
+
+![Database Schema Diagram](https://res.cloudinary.com/drasm4tug/image/upload/v1747503624/Screenshot_2025-05-16_at_2.50.49_PM_t9oxpf.png)
+
+
 
 ## Summary
 
