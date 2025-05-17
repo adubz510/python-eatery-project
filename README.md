@@ -10,7 +10,7 @@ https://python-eatery-project.onrender.com
 
 - User: id, username, email, hashed_password
 - Restaurant: id, owner_id, name, description, category, price_range, address, city, state, zip_code, lat, lng
-- Image: id, restaurant_id, user_id (FK → User), url
+- Image: id, restaurant_id, user_id, url
 - MenuItem: id, restaurant_id, name, description, price, image_url
 - Review: id, restaurant_id, user_id, rating, comment, created_at, updated_at
 
