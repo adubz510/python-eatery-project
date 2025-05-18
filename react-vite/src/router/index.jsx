@@ -7,6 +7,7 @@ import HomePage from '../components/HomePage/HomePage';
 import SearchResultsPage from '../components/BrowseRestaurantPage/SearchResultsPage';
 import AccountPage from '../components/AccountPage/AccountPage';
 import RestaurantDetailsPage from '../components/RestaurantDetailsPage/RestaurantDetailsPage';
+import ShoppingCart from '../components/ShoppingCart/ShoppingCart';
 
 
 export const router = createBrowserRouter([
@@ -40,6 +41,10 @@ export const router = createBrowserRouter([
       {
         path: "account",
         element: <AccountPage />,
+      },
+      {
+        path: "cart",
+        element: <ShoppingCart />
       },
     ],
   },

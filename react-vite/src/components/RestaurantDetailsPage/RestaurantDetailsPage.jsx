@@ -26,7 +26,6 @@ const RestaurantDetailsPage = () => {
   const { setModalContent, setOnModalClose } = useModal();
 
   useEffect(() => {
-    console.log("Dispatching fetch for menu items:", restaurantId);
     dispatch(thunkFetchRestaurantById(restaurantId));
     dispatch(thunkFetchReviews(restaurantId));
     dispatch(thunkFetchMenuItems(restaurantId));
@@ -34,7 +33,6 @@ const RestaurantDetailsPage = () => {
 
   if (!restaurant) return <div>Loading...</div>;
 
-  console.log('MENUITEMS:', menuItems)
 
   const {
     name, description, category, priceRange,
@@ -84,6 +82,8 @@ const RestaurantDetailsPage = () => {
     setModalContent(<DeleteMenuItemModal itemId={itemId} />);
   };
 
+
+
   return (
     <div className="restaurant-details">
       <h1>{name}</h1>
@@ -130,6 +130,7 @@ const RestaurantDetailsPage = () => {
                     </button>
                   </div>
                 )}
+
               </li>
             ))}
           </ul>

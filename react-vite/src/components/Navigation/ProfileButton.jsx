@@ -58,7 +58,14 @@ function ProfileButton() {
               <li>{user.username}</li>
               <li>{user.email}</li>
               <li>
-                <button onClick={() => navigate(`/account`)} style={{ cursor: 'pointer'}} className="account-button">Account</button>
+                <button onClick={() => navigate(`/account`)} style={{ cursor: 'pointer'}} className="account-button">
+                  Account
+                </button>
+              </li>
+              <li>
+                <button onClick={() => navigate('/cart')} style={{ cursor: 'pointer' }} className="cart-button">
+                  Cart
+                </button>
               </li>
               <li className="logout-li">
                 <button onClick={logout} style={{ cursor: 'pointer'}} className="Logout-button">Log Out</button>

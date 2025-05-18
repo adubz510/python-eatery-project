@@ -13,6 +13,7 @@ class MenuItem(db.Model):
     image_url = db.Column(db.String, nullable=True)
 
     restaurant = db.relationship("Restaurant", back_populates="menu_items")
+    cart_items = db.relationship('CartItem', back_populates='menu_item', cascade='all, delete-orphan')
 
     def to_dict(self):
         return {
