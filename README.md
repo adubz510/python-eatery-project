@@ -22,6 +22,23 @@ https://python-eatery-project.onrender.com
 
 This is a full-stack clone of UberEats, a food delivery and restaurant ordering platform. The project allows users to browse restaurants, view detailed menus, add items to a shopping cart, and place orders. Core features include user authentication, restaurant and menu item CRUD functionality, real-time cart management, and a responsive search system. Users can also leave reviews for restaurants, view past orders, and quickly reorder from previous purchases. 
 
+## 🖼 Screenshots
+
+| Feature | Screenshot |
+|--------|------------|
+| Signup Page | ![Signup Page](https://res.cloudinary.com/drasm4tug/image/upload/v1747591274/Screenshot_2025-05-16_at_2.52.57_PM_jd8cl2.png) |
+| Login Page | ![Login Page](https://res.cloudinary.com/drasm4tug/image/upload/v1747591283/Screenshot_2025-05-16_at_2.57.20_PM_pgaxb6.png) |
+| Logged Out Homepage | ![Logged Out Homepage](https://res.cloudinary.com/drasm4tug/image/upload/v1747591299/Screenshot_2025-05-16_at_2.51.29_PM_e0ooyp.png) |
+| Logged In Homepage | ![Logged In Homepage](https://res.cloudinary.com/drasm4tug/image/upload/v1747591292/Screenshot_2025-05-16_at_2.58.18_PM_xzhkcf.png) |
+| Browse Restaurant Page | ![Browse Restaurant Page](https://res.cloudinary.com/drasm4tug/image/upload/v1747591303/Screenshot_2025-05-16_at_2.58.29_PM_xypwox.png) |
+| Search Restaurant Page | ![Search Restaurant Page](https://res.cloudinary.com/drasm4tug/image/upload/v1747591312/Screenshot_2025-05-16_at_2.58.37_PM_o9vwaq.png) |
+| User Account Page | ![User Account Page](https://res.cloudinary.com/drasm4tug/image/upload/v1747591321/Screenshot_2025-05-16_at_2.58.45_PM_ujog2j.png) |
+| Restaurant Details Page | ![Restaurant Details Page](https://res.cloudinary.com/drasm4tug/image/upload/v1747591351/Screenshot_2025-05-16_at_2.59.10_PM_xux2j8.png) |
+| Restaurant Details Page cont'd | ![Restaurant Details Page cont'd](https://res.cloudinary.com/drasm4tug/image/upload/v1747591355/Screenshot_2025-05-16_at_2.59.16_PM_jyfv8e.png) |
+
+---
+
+
 
 ## 🔧 Features
 ### User Authentication
@@ -95,4 +112,31 @@ This is a full-stack clone of UberEats, a food delivery and restaurant ordering 
 - MenuItem: id, restaurant_id, name, description, price, image_url
 - Review: id, restaurant_id, user_id, rating, comment, created_at, updated_at
 
+
+
+
+
+## 🛠 Installation & Setup
+
+1. Clone the repository:
+```bash
+git clone <repo-url>
+cd capstone-yelpproj
+```
+
+2. Backend setup:
+```bash
+pipenv install
+pipenv shell
+flask db upgrade
+flask seed all
+flask run
+```
+
+3. Frontend setup:
+```bash
+cd react-vite
+npm install
+npm run build
+```
 
