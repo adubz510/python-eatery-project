@@ -47,3 +47,27 @@
     color: black;
     border-color: #1f7e35;
   }
+
+  .delete-review-modal .cancel-button {
+    background-color: #222;
+    color: white;
+    border-color: white;
+  }
+  
+  .delete-review-modal .cancel-button:hover {
+    background-color: #1f7e35;
+    color: white;
+    border-color: #1f7e35;
+  }
+  
+  .delete-review-modal .delete-button {
+    background-color: #440000;
+    border-color: red;
+    color: white;
+  }
+  
+  .delete-review-modal .delete-button:hover {
+    background-color: red;
+    color: black;
+    border-color: red;
+  }
