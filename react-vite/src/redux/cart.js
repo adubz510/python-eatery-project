@@ -1,6 +1,7 @@
 // Action Types
 const LOAD_CARTS = 'cart/LOAD_CARTS';
 const ADD_TO_CART = 'cart/ADD_TO_CART';
+const UPDATE_CART_ITEM = 'cart/UPDATE_CART_ITEM';
 const REMOVE_FROM_CART = 'cart/REMOVE_FROM_CART';
 
 // Action Creators
@@ -12,6 +13,11 @@ const loadCarts = (carts) => ({
 const addToCart = (cart) => ({
   type: ADD_TO_CART,
   payload: cart
+});
+
+const updateCartItem = (item) => ({
+  type: UPDATE_CART_ITEM,
+  payload: item
 });
 
 const removeFromCart = (cartItemId) => ({
@@ -56,6 +62,29 @@ export const thunkAddToCart = (menuItemId, quantity, restaurantId) => async (dis
     }
   } catch (err) {
     console.error('Unexpected add to cart error:', err);
+  }
+};
+
+export const thunkUpdateCartItem = (cartItemId, quantity) => async (dispatch) => {
+  try {
+    const res = await fetch(`/api/cart/items/${cartItemId}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ quantity })
+    });
+
+    if (!res.ok) throw new Error('Failed to update cart item');
+
+    if (res.ok) {
+      const updatedItem = await res.json();
+      dispatch(updateCartItem(updatedItem));
+      return updatedItem;
+    } else {
+      const errorData = await res.json();
+      return errorData;
+    }
+  } catch (err) {
+    console.error('Unexpected update cart item error:', err);
   }
 };
 
@@ -121,6 +150,17 @@ function cartReducer(state = initialState, action) {
           }
         },
         cartItems
+      };
+    }
+
+    case UPDATE_CART_ITEM: {
+      const updatedItem = action.payload;
+      return {
+        ...state,
+        cartItems: {
+          ...state.cartItems,
+          [updatedItem.id]: updatedItem,
+        },
       };
     }
 

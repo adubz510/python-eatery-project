@@ -41,6 +41,25 @@ def add_to_cart():
 
     return jsonify(cart.to_dict())
 
+@cart_routes.route('/items/<int:cart_item_id>', methods=['PUT'])
+@login_required
+def update_cart_item(cart_item_id):
+    data = request.json
+    new_quantity = data.get('quantity')
+
+    if new_quantity is None or not isinstance(new_quantity, int) or new_quantity < 1:
+        return jsonify({"error": "Quantity must be a positive integer"}), 400
+
+    cart_item = CartItem.query.get(cart_item_id)
+    if not cart_item or cart_item.cart.user_id != current_user.id:
+        return jsonify({"error": "Cart item not found or unauthorized"}), 404
+
+    cart_item.quantity = new_quantity
+    db.session.commit()
+
+    return jsonify(cart_item.to_dict())
+
+
 @cart_routes.route('/items/<int:cart_item_id>', methods=['DELETE'])
 @login_required
 def remove_from_cart(cart_item_id):
