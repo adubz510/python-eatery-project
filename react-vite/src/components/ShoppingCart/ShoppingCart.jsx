@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useModal } from '../../context/Modal';
 import { thunkFetchUserCarts, thunkRemoveFromCart, thunkUpdateCartItem } from '../../redux/cart';
+import AddCartItemModal from './AddCartItemModal';
 import './ShoppingCart.css'
 
 function CartItem({ item, onRemove, onUpdate }) {
@@ -52,21 +54,33 @@ function CartItem({ item, onRemove, onUpdate }) {
           </span>
           <span>Price: ${price.toFixed(2)}</span>
           <span>Subtotal: ${(price * item.quantity).toFixed(2)}</span>
-          <button onClick={() => onRemove(item.id)}>Remove</button>
+          <button onClick={() => onRemove(item.id)}>
+            Remove
+          </button>
         </div>
       );
     }
     
     function Cart({ cart, cartItems, onRemoveItem, onUpdateItem }) {
+      const { setModalContent } = useModal();
+
       const total = cartItems.reduce((sum, item) => {
         const price = item.menuItem?.price || 0;
         const quantity = item.quantity || 1;
         return sum + price * quantity;
       }, 0);
+
+      const openAddItemModal = () => {
+        setModalContent(<AddCartItemModal cart={cart} />);
+      };
     
       return (
         <div className="cart">
-          <h2>{cart.restaurant?.name || `Restaurant #${cart.restaurantId}`}</h2>
+          <div className="cart-header">
+            <h2>{cart.restaurant?.name || `Restaurant #${cart.restaurantId}`}</h2>
+            <button className='menu-item-addCart' onClick={openAddItemModal}>Add Item to Cart</button>
+          </div>
+
           {cartItems.length === 0 && <p>Cart is empty</p>}
           {cartItems.map(item => (
             <CartItem
@@ -77,6 +91,7 @@ function CartItem({ item, onRemove, onUpdate }) {
             />
           ))}
           <div className="cart-total">Total: ${total.toFixed(2)}</div>
+
         </div>
       );
     }

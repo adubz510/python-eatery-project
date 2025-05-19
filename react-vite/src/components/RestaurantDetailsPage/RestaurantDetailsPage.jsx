@@ -25,6 +25,7 @@ const RestaurantDetailsPage = () => {
   const sessionUser = useSelector(state => state.session.user);
   const { setModalContent, setOnModalClose } = useModal();
 
+
   useEffect(() => {
     dispatch(thunkFetchRestaurantById(restaurantId));
     dispatch(thunkFetchReviews(restaurantId));
@@ -82,8 +83,6 @@ const RestaurantDetailsPage = () => {
     setModalContent(<DeleteMenuItemModal itemId={itemId} />);
   };
 
-
-
   return (
     <div className="restaurant-details">
       <h1>{name}</h1>
@@ -103,6 +102,7 @@ const RestaurantDetailsPage = () => {
             Add Menu Item
           </button>
         )}
+
 
         {menuItems.length ? (
           <ul className="menu-items-list">
@@ -128,10 +128,11 @@ const RestaurantDetailsPage = () => {
                     <button onClick={() => handleDeleteMenuItem(item.id)} className="delete-button">
                       Delete
                     </button>
+                 
                   </div>
                 )}
-
               </li>
+
             ))}
           </ul>
         ) : (
