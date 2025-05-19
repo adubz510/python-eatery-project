@@ -2,38 +2,49 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { thunkCreateMenuItem } from '../../redux/menuItem';
 import { useModal } from '../../context/Modal';
-import './CreateMenuItemModal.css'
+import './CreateMenuItemModal.css';
 
 const CreateMenuItemModal = ({ restaurantId }) => {
   const dispatch = useDispatch();
   const { setModalContent } = useModal();
 
-  // State for the form fields
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState('');
   const [imageUrl, setImageUrl] = useState('');
-
   const [errors, setErrors] = useState([]);
 
-  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Validate form fields
     const validationErrors = [];
     if (!name) validationErrors.push("Name is required");
-    if (!price || isNaN(price) || price <= 0) validationErrors.push("Price must be a positive number");
+    if (!price || isNaN(price) || parseFloat(price) <= 0)
+      validationErrors.push("Price must be a positive number");
+
     if (validationErrors.length) {
       setErrors(validationErrors);
       return;
     }
 
-    // Dispatch the thunk to create the menu item
-    await dispatch(thunkCreateMenuItem({ restaurantId, name, description, price: parseFloat(price), imageUrl }));
+    // Try to dispatch the thunk
+    const response = await dispatch(
+      thunkCreateMenuItem({
+        restaurantId,
+        name,
+        description,
+        price: parseFloat(price),
+        imageUrl,
+      })
+    );
 
-    // Close the modal after successful creation
-    setModalContent(null);
+    // If there's an error (e.g., response has `errors`), show it
+    if (response?.errors) {
+      setErrors(response.errors);
+    } else {
+      // Only close modal on successful creation
+      setModalContent(null);
+    }
   };
 
   return (
@@ -97,7 +108,9 @@ const CreateMenuItemModal = ({ restaurantId }) => {
         </div>
 
         <div className="modal-actions">
-          <button type="submit" className="submit-button">Create Menu Item</button>
+          <button type="submit" className="submit-button">
+            Create Menu Item
+          </button>
           <button
             type="button"
             className="cancel-button"

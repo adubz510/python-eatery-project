@@ -47,9 +47,15 @@
     transition: all 0.2s ease-in-out;
     min-width: 120px;
   }
-  
-  .delete-menu-item-modal button:hover {
-    background-color: #00ff84;
-    color: black;
-    border-color: #00ff84;
-  }
+
+  .delete-menu-item-modal .cancel-button {
+  background-color: #222;
+  color: white;
+  border-color: white;
+}
+
+.delete-menu-item-modal .cancel-button:hover {
+  background-color: #00a656;
+  color: white;
+  border-color: white;
+}

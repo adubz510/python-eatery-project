@@ -33,7 +33,7 @@ const DeleteMenuItemModal = ({ itemId }) => {
 
       {error && <div className="error-message">{error}</div>}
 
-      <div className="modal-actions">
+      <div className="button-group">
         <button onClick={closeModal} className="cancel-button">Cancel</button>
         <button onClick={handleDelete} disabled={loading} className="delete-button">
           {loading ? 'Deleting...' : 'Delete'}

@@ -43,24 +43,30 @@ export const thunkFetchMenuItems = (restaurantId) => async (dispatch) => {
 export const thunkCreateMenuItem = (menuItemData) => async (dispatch) => {
   const { restaurantId, name, description, price, imageUrl } = menuItemData;
 
-  const res = await fetch(`/api/menu-items/restaurant/${restaurantId}`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      name,
-      description,
-      price,
-      image_url: imageUrl,
-    }),
-  });
+  try {
+    const res = await fetch(`/api/menu-items/restaurant/${restaurantId}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name,
+        description,
+        price,
+        image_url: imageUrl,
+      }),
+    });
 
-  if (res.ok) {
-    const newMenuItem = await res.json();
-    dispatch(createMenuItem(newMenuItem));
-  } else {
-    console.error('Error creating menu item');
+    if (res.ok) {
+      const newMenuItem = await res.json();
+      dispatch(createMenuItem(newMenuItem));
+      return newMenuItem; // success case — will be truthy in modal
+    } else {
+      const errorData = await res.json();
+      return errorData; // error case — will be checked in modal
+    }
+  } catch (err) {
+    return { errors: ["Something went wrong. Please try again later."] };
   }
 };
 
