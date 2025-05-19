@@ -65,8 +65,8 @@ const AccountPage = () => {
                     <p className="restaurant-address">{restaurant.address}</p>
                   </div>
                   <div className="restaurant-buttons">
-                    <button onClick={() => handleUpdateRestaurant(restaurant)}>Update</button>
-                    <button onClick={() => handleDeleteRestaurant(restaurant)}>Delete</button>
+                    <button onClick={(e) => { e.stopPropagation(); handleUpdateRestaurant(restaurant)}}>Update</button>
+                    <button onClick={(e) => { e.stopPropagation(); handleDeleteRestaurant(restaurant)}}>Delete</button>
                   </div>
                 </div>
               );

@@ -34,6 +34,14 @@
     font-size: 30px;    
     color: #ccc;
   }
+
+  .button-group {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+  }
   
   .modal-container button {
     margin: 0 8px;        

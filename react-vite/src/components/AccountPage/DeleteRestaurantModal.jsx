@@ -25,8 +25,10 @@ function DeleteRestaurantModal({ restaurant }) {
       <div className="modal-container">
         <h2>Are you sure you want to delete this restaurant?</h2>
         <p>{restaurant.name}</p>
+        <div className="button-group">
         <button className="delete-button" onClick={handleDelete}>Delete</button>
         <button onClick={closeModal}>Cancel</button>
+        </div>
       </div>
     </div>
   );
