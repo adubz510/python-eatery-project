@@ -55,7 +55,7 @@
 }
 
 .delete-menu-item-modal .cancel-button:hover {
-  background-color: #00a656;
+  background-color: #1f7e35;
   color: white;
-  border-color: white;
+  border-color: #1f7e35;
 }
