@@ -8,17 +8,17 @@ function UpdateRestaurantModal({ restaurant }) {
   const dispatch = useDispatch();
   const { closeModal } = useModal();
 
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
-  const [category, setCategory] = useState("");
-  const [priceRange, setPriceRange] = useState("");
-  const [address, setAddress] = useState("");
-  const [city, setCity] = useState("");
-  const [state, setState] = useState("");
-  const [zipCode, setZipCode] = useState("");
-  const [lat, setLat] = useState("");
-  const [lng, setLng] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
+  const [name, setName] = useState(restaurant.name || "");
+  const [description, setDescription] = useState(restaurant.description || "");
+  const [category, setCategory] = useState(restaurant.category || "");
+  const [priceRange, setPriceRange] = useState(restaurant.priceRange || "");
+  const [address, setAddress] = useState(restaurant.address || "");
+  const [city, setCity] = useState(restaurant.city || "");
+  const [state, setState] = useState(restaurant.state || "");
+  const [zipCode, setZipCode] = useState(restaurant.zipCode || "");
+  const [lat, setLat] = useState(restaurant.lat?.toString() || "");
+  const [lng, setLng] = useState(restaurant.lng?.toString() || "");
+  const [imageUrl, setImageUrl] = useState(restaurant.imageUrl || "");
   const [errors, setErrors] = useState({});
 
   const validate = () => {
