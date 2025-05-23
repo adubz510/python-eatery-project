@@ -42,6 +42,19 @@
   margin: 6px 0;
 }
 
+
+.menu-item-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.menu-item-buttons {
+  display: flex;
+  gap: 8px;
+}
+
 .menu-section,
 .reviews-section {
   margin-top: 48px;
@@ -58,7 +71,7 @@
 .create-review-button,
 .update-button,
 .delete-button,
-.menu-item-addCart button {
+.menu-item-addCart {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -146,9 +159,26 @@
   margin-top: 8px;
 }
 
-.menu-item-addCart {
-  margin-top: 8px;
+.add-to-cart-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: black;
+  color: white;
+  padding: 12px 24px;
+  border: 2px solid rgb(146, 255, 157); /* green accent */
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
+
+.add-to-cart-button:hover {
+  background-color: #222;
+  transform: scale(1.03);
+}
+
 
 /* Reviews */
 .review-header {
@@ -180,3 +210,4 @@
   border-radius: 8px;
   border: 1px solid #ccc;
 }
+

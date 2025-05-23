@@ -78,7 +78,7 @@ function CartItem({ item, onRemove, onUpdate }) {
         <div className="cart">
           <div className="cart-header">
             <h2>{cart.restaurant?.name || `Restaurant #${cart.restaurantId}`}</h2>
-            <button className='menu-item-addCart' onClick={openAddItemModal}>Add Item to Cart</button>
+            <button className='menu-item-addCart' onClick={openAddItemModal}>Add Items to Cart</button>
           </div>
 
           {cartItems.length === 0 && <p>Cart is empty</p>}
@@ -122,6 +122,7 @@ function CartItem({ item, onRemove, onUpdate }) {
           <h1>Your Shopping Cart</h1>
           {Object.values(carts).map(cart => {
             const items = cart.cartItems.map(id => cartItemsById[id]).filter(Boolean);
+            
             return (
               <Cart
                 key={cart.id}

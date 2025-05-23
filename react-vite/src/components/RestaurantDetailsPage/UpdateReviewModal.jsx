@@ -8,7 +8,7 @@ const UpdateReviewModal = ({ review }) => {
   const dispatch = useDispatch();
   const { closeModal } = useModal();
 
-  const [rating, setRating] = useState("");
+  const [rating, setRating] = useState(review.rating);
   const [comment, setComment] = useState(review.comment);
   const [errors, setErrors] = useState([]);
   const [loading, setLoading] = useState(false);

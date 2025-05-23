@@ -5,7 +5,7 @@ import { thunkFetchMenuItems } from '../../redux/menuItem';
 import { thunkAddToCart, thunkFetchUserCarts } from '../../redux/cart';
 import './AddCartItemModal.css';
 
-export default function AddCartItemModal({ cart }) {
+function AddCartItemModal({ cart }) {
   const dispatch = useDispatch();
   const { closeModal } = useModal();  // Get closeModal from context here
 
@@ -80,3 +80,5 @@ export default function AddCartItemModal({ cart }) {
     </div>
   );
 }
+
+export default AddCartItemModal
