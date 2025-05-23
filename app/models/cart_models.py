@@ -1,16 +1,29 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from datetime import datetime
+from sqlalchemy import UniqueConstraint
 
 class Cart(db.Model):
     __tablename__ = 'carts'
 
     if environment == "production":
-        __table_args__ = {'schema': SCHEMA}
+        __table_args__ = (
+        UniqueConstraint('user_id', 'restaurant_id', name='user_restaurant_uc'),
+            {'schema': SCHEMA}
+        )
+    else:
+        __table_args__ = (
+            UniqueConstraint('user_id', 'restaurant_id', name='user_restaurant_uc'),
+        )
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
     restaurant_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("restaurants.id")), nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+    # id = db.Column(db.Integer, primary_key=True)
+    # user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
+    # restaurant_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("restaurants.id")), nullable=False)
+    # created_at = db.Column(db.DateTime, default=datetime.now)
 
     # Relationships
     user = db.relationship("User", back_populates="carts")

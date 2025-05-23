@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
-from app.models import db, Cart, CartItem
+from app.models import db, Cart, CartItem, MenuItem, Restaurant
 
 cart_routes = Blueprint('cart', __name__)
 
@@ -15,31 +15,62 @@ def get_user_carts():
 @login_required
 def add_to_cart():
     data = request.json
+    print("Received data:", data)
     menu_item_id = data.get('menuItemId')
     quantity = data.get('quantity', 1)
     restaurant_id = data.get('restaurantId')
 
     if not menu_item_id or not restaurant_id:
+        print("Missing menuItemId or restaurantId")
         return jsonify({"error": "Missing menuItemId or restaurantId"}), 400
 
-    # Find or create a cart for the user and restaurant
-    cart = Cart.query.filter_by(user_id=current_user.id, restaurant_id=restaurant_id).first()
-    if not cart:
-        cart = Cart(user_id=current_user.id, restaurant_id=restaurant_id)
-        db.session.add(cart)
-        db.session.flush()  # flush to get cart.id
+    try:
+        quantity = int(quantity)
+        if quantity < 1:
+            print("Quantity less than 1")
+            return jsonify({"error": "Quantity must be at least 1"}), 400
+    except (ValueError, TypeError) as e:
+        print("Quantity invalid:", e)
+        return jsonify({"error": "Quantity must be an integer"}), 400
 
-    # Check if the item already exists in the cart
-    cart_item = CartItem.query.filter_by(cart_id=cart.id, menu_item_id=menu_item_id).first()
-    if cart_item:
-        cart_item.quantity += quantity
-    else:
-        cart_item = CartItem(cart_id=cart.id, menu_item_id=menu_item_id, quantity=quantity)
-        db.session.add(cart_item)
+    menu_item = MenuItem.query.get(menu_item_id)
+    restaurant = Restaurant.query.get(restaurant_id)
+    if not menu_item:
+        print(f"MenuItem not found: {menu_item_id}")
+        return jsonify({"error": "Invalid menu item ID"}), 400
+    if not restaurant:
+        print(f"Restaurant not found: {restaurant_id}")
+        return jsonify({"error": "Invalid restaurant ID"}), 400
 
-    db.session.commit()
+    try:
+        cart = Cart.query.filter_by(user_id=current_user.id, restaurant_id=restaurant_id).first()
+        if not cart:
+            print("Creating new cart")
+            cart = Cart(user_id=current_user.id, restaurant_id=restaurant_id)
+            db.session.add(cart)
+            db.session.commit()
+            print("New cart created with ID:", cart.id)
 
-    return jsonify(cart.to_dict())
+        cart_item = CartItem.query.filter_by(cart_id=cart.id, menu_item_id=menu_item_id).first()
+        if cart_item:
+            print(f"Updating quantity for cart item {cart_item.id}")
+            cart_item.quantity += quantity
+        else:
+            print("Adding new cart item")
+            cart_item = CartItem(cart_id=cart.id, menu_item_id=menu_item_id, quantity=quantity)
+            db.session.add(cart_item)
+
+        db.session.commit()
+        print("Committed cart changes")
+
+        return jsonify(cart.to_dict())
+
+    except Exception as e:
+        db.session.rollback()
+        print("Exception during DB operation:", e)
+        return jsonify({"error": str(e)}), 500
+
+
 
 @cart_routes.route('/items/<int:cart_item_id>', methods=['PUT'])
 @login_required

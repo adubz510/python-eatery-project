@@ -77,7 +77,7 @@ function CartItem({ item, onRemove, onUpdate }) {
       if (cartItems.length === 0) {
         // Optional: you can show "Cart is empty" without restaurant info here,
         // or just return null to skip rendering empty cart.
-        return <div className="cart-empty">Cart is empty</div>;
+        return null
       }
     
       return (
@@ -123,7 +123,7 @@ function CartItem({ item, onRemove, onUpdate }) {
       const nonEmptyCarts = Object.values(carts).filter(cart => cart.cartItems.length > 0);
 
         if (nonEmptyCarts.length === 0) {
-            return <div>Your cart is empty.</div>;
+            return <div className="empty-cart-message">YOUR CART IS EMPTY.</div>;
         }
     
       return (

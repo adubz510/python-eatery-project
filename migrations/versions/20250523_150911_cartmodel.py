@@ -1,8 +1,8 @@
-"""added cart and cartItems
+"""CARTMODEL
 
-Revision ID: 31dfb2d3f3de
+Revision ID: 57f6fa0942ec
 Revises: 189a895bdeed
-Create Date: 2025-05-18 12:34:52.921522
+Create Date: 2025-05-23 15:09:11.182078
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '31dfb2d3f3de'
+revision = '57f6fa0942ec'
 down_revision = '189a895bdeed'
 branch_labels = None
 depends_on = None
@@ -21,17 +21,19 @@ def upgrade():
     op.create_table('carts',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
-    sa.Column('restaurant_id', sa.Integer(), nullable=True),
+    sa.Column('restaurant_id', sa.Integer(), nullable=False),
+    sa.Column('created_at', sa.DateTime(), nullable=True),
     sa.ForeignKeyConstraint(['restaurant_id'], ['restaurants.id'], ),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id'),
-    sa.UniqueConstraint('user_id')
+    sa.UniqueConstraint('user_id', 'restaurant_id', name='user_restaurant_uc')
     )
     op.create_table('cart_items',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('cart_id', sa.Integer(), nullable=False),
     sa.Column('menu_item_id', sa.Integer(), nullable=False),
     sa.Column('quantity', sa.Integer(), nullable=False),
+    sa.Column('created_at', sa.DateTime(), nullable=True),
     sa.ForeignKeyConstraint(['cart_id'], ['carts.id'], ),
     sa.ForeignKeyConstraint(['menu_item_id'], ['menu_items.id'], ),
     sa.PrimaryKeyConstraint('id')
