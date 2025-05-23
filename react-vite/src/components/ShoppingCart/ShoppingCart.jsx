@@ -73,6 +73,12 @@ function CartItem({ item, onRemove, onUpdate }) {
       const openAddItemModal = () => {
         setModalContent(<AddCartItemModal cart={cart} />);
       };
+
+      if (cartItems.length === 0) {
+        // Optional: you can show "Cart is empty" without restaurant info here,
+        // or just return null to skip rendering empty cart.
+        return <div className="cart-empty">Cart is empty</div>;
+      }
     
       return (
         <div className="cart">
@@ -113,9 +119,12 @@ function CartItem({ item, onRemove, onUpdate }) {
         dispatch(thunkUpdateCartItem(cartItemId, quantity));
       };
     
-      if (!carts || Object.keys(carts).length === 0) {
-        return <div>Your cart is empty.</div>;
-      }
+  
+      const nonEmptyCarts = Object.values(carts).filter(cart => cart.cartItems.length > 0);
+
+        if (nonEmptyCarts.length === 0) {
+            return <div>Your cart is empty.</div>;
+        }
     
       return (
         <div className="shopping-cart-page">
