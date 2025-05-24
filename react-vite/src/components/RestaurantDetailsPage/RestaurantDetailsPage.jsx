@@ -54,12 +54,20 @@ const RestaurantDetailsPage = () => {
 
   const imageUrl = images?.[0]?.url || '/fallback-image.jpg';
 
-  const activeCart = Object.values(carts)[0];
-  const cartRestaurantId = activeCart?.restaurantId;
-  const cartItemIds = activeCart?.cartItems || [];
-  const cartIsEmpty = cartItemIds.length === 0;
-  const cartBelongsToThisRestaurant = cartRestaurantId === Number(restaurantId);
-  const canAddToCart = cartIsEmpty || cartBelongsToThisRestaurant;
+  const cartsArray = Object.values(carts);
+
+  // Find cart for this restaurant
+  const activeCart = cartsArray.find(cart => cart.restaurantId === Number(restaurantId));
+  const hasCartForThisRestaurant = !!activeCart;
+  
+  // Check if any other cart (different restaurant) has items
+  const hasOtherCart = cartsArray.some(cart => {
+    return cart.restaurantId !== Number(restaurantId) && Array.isArray(cart.cartItems) && cart.cartItems.length > 0;
+  });
+  
+  // Determine if we can add to cart (either no other cart has items or this restaurant has a cart)
+  const canAddToCart = !hasOtherCart || hasCartForThisRestaurant;
+  
 
   // Handle Create Review
   const handleCreateReview = () => {
