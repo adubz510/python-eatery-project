@@ -54,12 +54,14 @@ const RestaurantDetailsPage = () => {
 
   const imageUrl = images?.[0]?.url || '/fallback-image.jpg';
 
-  const activeCart = Object.values(carts)[0];
-  const cartRestaurantId = activeCart?.restaurantId;
-  const cartItemIds = activeCart?.cartItems || [];
-  const cartIsEmpty = cartItemIds.length === 0;
-  const cartBelongsToThisRestaurant = cartRestaurantId === Number(restaurantId);
-  const canAddToCart = cartIsEmpty || cartBelongsToThisRestaurant;
+
+const activeCart = Object.values(carts).find(cart => cart.restaurantId === Number(restaurantId));
+const hasItemsInOtherRestaurantCart = Object.values(carts).some(cart =>
+  cart.restaurantId !== Number(restaurantId) && cart.cartItems.length > 0
+);
+const cartItemIds = activeCart?.cartItems || [];
+const cartIsEmpty = cartItemIds.length === 0;
+const canAddToCart = !hasItemsInOtherRestaurantCart && (!activeCart || cartIsEmpty);
 
   // Handle Create Review
   const handleCreateReview = () => {

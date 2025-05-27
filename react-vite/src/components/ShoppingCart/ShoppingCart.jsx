@@ -87,7 +87,6 @@ function CartItem({ item, onRemove, onUpdate }) {
             <button className='menu-item-addCart' onClick={openAddItemModal}>Add Items to Cart</button>
           </div>
 
-          {cartItems.length === 0 && <p>Cart is empty</p>}
           {cartItems.map(item => (
             <CartItem
               key={item.id}
@@ -103,45 +102,47 @@ function CartItem({ item, onRemove, onUpdate }) {
     }
     
     export default function ShoppingCart() {
-      const dispatch = useDispatch();
-      const carts = useSelector(state => state.cart.carts);
-      const cartItemsById = useSelector(state => state.cart.cartItems);
-    
-      useEffect(() => {
-        dispatch(thunkFetchUserCarts());
-      }, [dispatch]);
-    
-      const handleRemove = (cartItemId) => {
-        dispatch(thunkRemoveFromCart(cartItemId));
-      };
-    
-      const handleUpdate = (cartItemId, quantity) => {
-        dispatch(thunkUpdateCartItem(cartItemId, quantity));
-      };
-    
-  
-      const nonEmptyCarts = Object.values(carts).filter(cart => cart.cartItems.length > 0);
-
+        const dispatch = useDispatch();
+        const carts = useSelector(state => state.cart.carts);
+        const cartItemsById = useSelector(state => state.cart.cartItems);
+      
+        useEffect(() => {
+          dispatch(thunkFetchUserCarts());
+        }, [dispatch]);
+      
+        const handleRemove = (cartItemId) => {
+          dispatch(thunkRemoveFromCart(cartItemId));
+        };
+      
+        const handleUpdate = (cartItemId, quantity) => {
+          dispatch(thunkUpdateCartItem(cartItemId, quantity));
+        };
+      
+        // Filter only carts that have items
+        const nonEmptyCarts = Object.values(carts).filter(cart => cart.cartItems.length > 0);
+      
         if (nonEmptyCarts.length === 0) {
-            return <div>Your cart is empty.</div>;
+          return <div>Your cart is empty.</div>;
         }
-    
-      return (
-        <div className="shopping-cart-page">
-          <h1>Your Shopping Cart</h1>
-          {Object.values(carts).map(cart => {
-            const items = cart.cartItems.map(id => cartItemsById[id]).filter(Boolean);
-            
-            return (
-              <Cart
-                key={cart.id}
-                cart={cart}
-                cartItems={items}
-                onRemoveItem={handleRemove}
-                onUpdateItem={handleUpdate}
-              />
-            );
-          })}
-        </div>
-      );
-    }
+      
+        return (
+          <div className="shopping-cart-page">
+            <h1>Your Shopping Cart</h1>
+            {nonEmptyCarts.map(cart => {
+              const items = cart.cartItems
+                .map(id => cartItemsById[id])
+                .filter(Boolean);
+      
+              return (
+                <Cart
+                  key={cart.id}
+                  cart={cart}
+                  cartItems={items}
+                  onRemoveItem={handleRemove}
+                  onUpdateItem={handleUpdate}
+                />
+              );
+            })}
+          </div>
+        );
+      }
