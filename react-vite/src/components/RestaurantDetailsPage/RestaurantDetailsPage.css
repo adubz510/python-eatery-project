@@ -1,4 +1,5 @@
 .restaurant-details {
+<<<<<<< HEAD
   max-width: 1000px;
   margin: 32px auto;
   padding: 40px;
@@ -180,6 +181,172 @@
   border-radius: 8px;
   border: 1px solid #ccc;
 }
+=======
+    max-width: 1000px;
+    margin: 32px auto;
+    padding: 40px;
+    background-color: #fff;
+    border-radius: 16px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+    font-family: 'Segoe UI', sans-serif;
+    color: #000;
+    line-height: 1.7;
+  }
+  
+  .restaurant-details h1 {
+    font-size: 44px;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #000;
+  }
+
+  .restaurant-details p {
+    color:#000 !important;
+    font-size: 18px;
+  }
+  
+  .restaurant-image {
+    width: 100%;
+    max-height: 420px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 32px;
+  }
+  
+  .restaurant-meta {
+    margin-bottom: 40px;
+    font-size: 17px;
+    line-height: 1.6;
+    padding: 16px;
+    background-color: #fafafa;
+    border-radius: 8px;
+    border: 1px solid #eee;
+    color: #000;
+  }
+  
+  .restaurant-meta p {
+    margin: 6px 0;
+    color: #000;
+  }
+  
+  .menu-section,
+  .reviews-section {
+    margin-top: 48px;
+  }
+  
+  .menu-section h2,
+  .reviews-section h2 {
+    font-size: 28px;
+    margin-bottom: 16px;
+    color: #000;
+  }
+  
+  .menu-section ul,
+  .reviews-section ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .menu-section li,
+  .reviews-section li {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 16px;
+    border: 1px solid #e0e0e0;
+    color: #000;
+  }
+  
+  .menu-section li strong {
+    font-size: 18px;
+    color: #000;
+  }
+  
+  .reviews-section li strong {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #000;
+  }
+  
+  .reviews-section li p {
+    margin: 4px 0;
+    color: #000;
+  }
+  
+  .review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #000;
+  }
+  
+  .review-date {
+    font-size: 14px;
+    color: #000;
+  }
+  
+  .review-comment {
+    margin: 8px 0 16px;
+    color: #000;
+  }
+  
+  .review-images {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 8px;
+  }
+  
+  .review-images img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+  }
+
+  
+  /* Menu Item Styles */
+  .menu-items-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .menu-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 16px;
+    border: 1px solid #e0e0e0;
+    color: #000 !important;
+  }
+  
+  .menu-item-image {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    flex-shrink: 0;
+  }
+  
+  .menu-item-details {
+    flex: 1;
+    color: #000 !important;
+  }
+  
+  .menu-item-details strong {
+    font-size: 18px;
+    color: #000;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+>>>>>>> parent of fd2e860 (styled the edit/delete buttons)
   .menu-item-details p {
     color: #000 !important;
   }
