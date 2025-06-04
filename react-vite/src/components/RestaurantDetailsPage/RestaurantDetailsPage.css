@@ -180,3 +180,16 @@
   border-radius: 8px;
   border: 1px solid #ccc;
 }
+  .menu-item-details p {
+    color: #000 !important;
+  }
+
+  @media (max-width: 768px) {
+    .restaurant-details {
+      padding: 16px;
+    }
+  
+    .restaurant-details h1 {
+      font-size: 32px;
+    }
+  }
