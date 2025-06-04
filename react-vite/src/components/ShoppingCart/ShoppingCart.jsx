@@ -84,7 +84,7 @@ function CartItem({ item, onRemove, onUpdate }) {
         <div className="cart">
           <div className="cart-header">
             <h2>{cart.restaurant?.name || `Restaurant #${cart.restaurantId}`}</h2>
-            <button className='menu-item-addCart' onClick={openAddItemModal}>Add Items to Cart</button>
+            <button className='menu-item-addCart' onClick={openAddItemModal}>Add Item to Cart</button>
           </div>
 
           {cartItems.map(item => (

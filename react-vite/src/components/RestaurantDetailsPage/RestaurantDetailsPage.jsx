@@ -5,7 +5,6 @@ import { useModal } from '../../context/Modal';
 import { thunkFetchRestaurantById } from '../../redux/restaurant';
 import { thunkFetchReviews } from '../../redux/review';
 import { thunkFetchMenuItems } from '../../redux/menuItem';
-import { thunkFetchUserCarts } from '../../redux/cart';
 
 import CreateReviewModal from './CreateReviewModal';
 import UpdateReviewModal from './UpdateReviewModal';
@@ -13,20 +12,17 @@ import DeleteReviewModal from './DeleteReviewModal';
 import CreateMenuItemModal from './CreateMenuItemModal';
 import UpdateMenuItemModal from './UpdateMenuItemModal';
 import DeleteMenuItemModal from './DeleteMenuItemModal';
-import QuickAddCartItemModal from './QuickAddCartItemModal';
+
 import './RestaurantDetailsPage.css';
 
 const RestaurantDetailsPage = () => {
   const dispatch = useDispatch();
   const { restaurantId } = useParams();
-
   const restaurant = useSelector(state => state.restaurants.restaurantById);
   const reviews = useSelector(state => Object.values(state.reviews.restaurantReviews));
   const menuItemsObj = useSelector(state => state.menuItems.restaurantMenuItems);
   const menuItems = Object.values(menuItemsObj);
-  const carts = useSelector(state => state.cart.carts);
   const sessionUser = useSelector(state => state.session.user);
-
   const { setModalContent, setOnModalClose } = useModal();
 
 
@@ -36,11 +32,8 @@ const RestaurantDetailsPage = () => {
     dispatch(thunkFetchMenuItems(restaurantId));
   }, [dispatch, restaurantId]);
 
-  useEffect(() => {
-    dispatch(thunkFetchUserCarts());
-  }, [dispatch]);
-
   if (!restaurant) return <div>Loading...</div>;
+
 
   const {
     name, description, category, priceRange,
@@ -99,16 +92,6 @@ const canAddToCart = !hasItemsInOtherRestaurantCart && (!activeCart || cartIsEmp
     setModalContent(<DeleteMenuItemModal itemId={itemId} />);
   };
 
-  // Handle Add Item to Cart 
-  const handleAddToCart = (menuItem) => {
-    setModalContent(
-      <QuickAddCartItemModal
-        cart={activeCart}
-        menuItem={menuItem}
-      />
-    );
-  };
-
   return (
     <div className="restaurant-details">
       <h1>{name}</h1>
@@ -146,29 +129,17 @@ const canAddToCart = !hasItemsInOtherRestaurantCart && (!activeCart || cartIsEmp
                   <p>{item.description}</p>
                 </div>
 
-                <div className="menu-item-actions">
                 {isOwner && (
-                  <div className="menu-item-buttons">
+                  <div className="menu-item-actions">
                     <button onClick={() => handleUpdateMenuItem(item)} className="update-button">
                       Edit
                     </button>
                     <button onClick={() => handleDeleteMenuItem(item.id)} className="delete-button">
                       Delete
-                    </button>                
+                    </button>
+                 
                   </div>
                 )}
-
-                {canAddToCart && (
-                <div className="menu-item-buttons">
-                <button
-                className="add-to-cart-button"
-                onClick={() => handleAddToCart(item)} 
-                >
-                  Add to Cart
-                </button>
-                </div>
-                )}
-                </div>
               </li>
 
             ))}

@@ -167,7 +167,7 @@ function cartReducer(state = initialState, action) {
     case REMOVE_FROM_CART: {
       const cartItems = { ...state.cartItems };
       const cartItemId = action.payload;
-    
+
       // Find which cart the cart item belongs to
       let cartIdToUpdate = null;
       Object.values(state.carts).forEach(cart => {
@@ -175,27 +175,19 @@ function cartReducer(state = initialState, action) {
           cartIdToUpdate = cart.id;
         }
       });
-    
-      // Remove the cart item
+
+      // Remove cart item
       delete cartItems[cartItemId];
-    
+
+      // Remove the cartItem id from the cart's cartItems array
       const carts = { ...state.carts };
-    
       if (cartIdToUpdate && carts[cartIdToUpdate]) {
-        const updatedItemIds = carts[cartIdToUpdate].cartItems.filter(id => id !== cartItemId);
-    
-        if (updatedItemIds.length === 0) {
-          // Cart is now empty — remove the cart entirely
-          delete carts[cartIdToUpdate];
-        } else {
-          // Update the cart with the remaining items
-          carts[cartIdToUpdate] = {
-            ...carts[cartIdToUpdate],
-            cartItems: updatedItemIds
-          };
-        }
+        carts[cartIdToUpdate] = {
+          ...carts[cartIdToUpdate],
+          cartItems: carts[cartIdToUpdate].cartItems.filter(id => id !== cartItemId)
+        };
       }
-    
+
       return {
         ...state,
         cartItems,
